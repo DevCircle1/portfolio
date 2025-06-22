@@ -39,7 +39,12 @@ function NavBar() {
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} style={{ height: '60px', width: 'auto' }} className="img-fluid logo" alt="brand" />
+          <img
+            src={logo}
+            style={{ height: "60px", width: "auto" }}
+            className="img-fluid logo"
+            alt="brand"
+          />
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -92,14 +97,18 @@ function NavBar() {
               </Nav.Link>
             </Nav.Item>
 
-            <Nav.Item className="fork-btn">
+            <Nav.Item className="d-flex align-items-center">
               <Button
-                href="https://github.com/soumyajit4419/Portfolio"
+                href="https://wa.me/923491465767?text=Hi%20there%2C%20I%20saw%20your%20portfolio%20and%20wanted%20to%20connect."
                 target="_blank"
                 className="fork-btn-inner"
+                style={{ backgroundColor: "#25D366", borderColor: "#25D366" }}
               >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
+                <i
+                  className="fab fa-whatsapp"
+                  style={{ fontSize: "1.3em" }}
+                ></i>{" "}
+                &nbsp; Chat
               </Button>
             </Nav.Item>
           </Nav>

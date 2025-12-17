@@ -3,7 +3,7 @@
   <a href="https://abdullahbutt-portfolio.netlify.app/" target="_blank">abdullah butt</a>
 </h2>
 <div align="center">
-  <img alt="Demo" src="./Images/readme-img1.png" />
+  <img alt="Demo" src="./Images/1.png" />
 </div>
 
 <br/>

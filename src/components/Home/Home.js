@@ -4,7 +4,7 @@ import homeLogo from "../../Assets/home-main.svg";
 import Particle from "../Particle";
 import Home2 from "./Home2";
 import Type from "./Type";
-
+import { World } from "./Globe";
 function Home() {
   return (
     <section>
@@ -30,12 +30,19 @@ function Home() {
               </div>
             </Col>
 
-            <Col md={5} style={{ paddingBottom: 20 }}>
-              <img
-                src={homeLogo}
-                alt="home pic"
-                className="img-fluid"
-                style={{ maxHeight: "450px" }}
+            <Col md={5} style={{ height: "450px" }}>
+              <World
+                globeConfig={{
+                  globeColor: "#1d072e",
+                  emissive: "#000000",
+                  emissiveIntensity: 0.1,
+                  shininess: 0.9,
+                  ambientLight: "#ffffff",
+                  directionalLeftLight: "#ffffff",
+                  directionalTopLight: "#ffffff",
+                  pointLight: "#ffffff",
+                }}
+                data={[]} // you can pass arcs data later
               />
             </Col>
           </Row>

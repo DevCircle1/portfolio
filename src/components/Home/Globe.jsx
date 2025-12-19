@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Color, Fog, PerspectiveCamera, Scene, Vector3 } from "three";
+import { Color, Fog, PerspectiveCamera, Scene } from "three";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import ThreeGlobe from "three-globe";

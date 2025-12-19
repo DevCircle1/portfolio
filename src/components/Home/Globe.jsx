@@ -32,7 +32,7 @@ function Globe({ data, globeConfig }) {
     mat.emissive = new Color("#220038");
     mat.emissiveIntensity = 0.25;
     mat.shininess = 1.1;
-  }, [ready]);
+  }, [ready, globeConfig.globeColor]);
 
   /* ---------- DATA ---------- */
   useEffect(() => {

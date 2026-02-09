@@ -44,8 +44,8 @@ function Globe({ data, globeConfig }) {
       .hexPolygonMargin(0.4)
       .hexPolygonColor(() => "rgba(255,255,255,0.08)")
       .showAtmosphere(true)
-      .atmosphereColor("#6b21a8")
-      .atmosphereAltitude(0.15);
+      .atmosphereColor("#3a228a")
+      .atmosphereAltitude(0.25);
 
     globeRef.current
       .arcsData(data)
@@ -55,7 +55,7 @@ function Globe({ data, globeConfig }) {
       .arcDashLength(0.6)
       .arcDashGap(4)
       .arcDashInitialGap((d) => d.order * 2)
-      .arcDashAnimateTime(4000);
+      .arcDashAnimateTime(1000);
 
     globeRef.current
       .pointsData(data)
@@ -83,7 +83,7 @@ function RendererConfig() {
   useEffect(() => {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
-    gl.setClearColor("#020617", 1);
+    gl.setClearColor("#000000", 1);
   }, [gl, size]);
 
   return null;
@@ -92,7 +92,7 @@ function RendererConfig() {
 /* ---------- WORLD ---------- */
 export function World() {
   const scene = new Scene();
-  scene.fog = new Fog("#020617", 400, 2000);
+  scene.fog = new Fog("#000000", 400, 2000);
 
   const arcs = [
     {
@@ -101,7 +101,7 @@ export function World() {
       startLng: -122.4194,
       endLat: 28.6139,
       endLng: 77.209,
-      color: "#a855f7",
+      color: "#ff007f", // Pink
     },
     {
       order: 2,
@@ -109,7 +109,7 @@ export function World() {
       startLng: -0.1276,
       endLat: 35.6895,
       endLng: 139.6917,
-      color: "#38bdf8",
+      color: "#00f3ff", // Cyan
     },
     {
       order: 3,
@@ -117,8 +117,40 @@ export function World() {
       startLng: 151.2093,
       endLat: 40.7128,
       endLng: -74.006,
-      color: "#22c55e",
+      color: "#00ff41", // Matrix Green
     },
+    {
+        order: 4,
+        startLat: 19.0760,
+        startLng: 72.8777,
+        endLat: 55.7558,
+        endLng: 37.6173,
+        color: "#ffdd00", // Yellow
+    },
+    {
+        order: 5,
+        startLat: -22.9068,
+        startLng: -43.1729,
+        endLat: 48.8566,
+        endLng: 2.3522,
+        color: "#ff4d00", // Orange
+    },
+    {
+        order: 6,
+        startLat: 1.3521,
+        startLng: 103.8198,
+        endLat: 34.0522,
+        endLng: -118.2437,
+        color: "#bf00ff", // Purple
+    },
+    {
+        order: 7,
+        startLat: 52.5200,
+        startLng: 13.4050,
+        endLat: -26.2041,
+        endLng: 28.0473,
+        color: "#ffffff", // White
+    }
   ];
 
   return (
@@ -137,7 +169,10 @@ export function World() {
       <Globe
         data={arcs}
         globeConfig={{
-          globeColor: "#0f172a",
+          globeColor: "#000000",
+          atmosphereColor: "#ffffff",
+          showAtmosphere: true,
+          atmosphereAltitude: 0.1,
         }}
       />
 
@@ -145,7 +180,7 @@ export function World() {
       <OrbitControls
         enableZoom={false}
         autoRotate
-        autoRotateSpeed={0.8}
+        autoRotateSpeed={1.0}
         minDistance={CAMERA_Z}
         maxDistance={CAMERA_Z}
         minPolarAngle={Math.PI / 3}

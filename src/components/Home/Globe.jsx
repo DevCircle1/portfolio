@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Color, Fog, PerspectiveCamera, Scene } from "three";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -94,6 +94,19 @@ export function World() {
   const scene = new Scene();
   scene.fog = new Fog("#000000", 400, 2000);
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Adjust camera Z position based on screen width
+  // Mobile needs a further camera to see the whole globe or closer if we want it to fill
+  // Usually for vertical screens (mobile), the FOV cuts off the sides, so we need to move back.
+  const responsiveCameraZ = width < 768 ? 450 : 320;
+
   const arcs = [
     {
       order: 1,
@@ -120,36 +133,36 @@ export function World() {
       color: "#00ff41", // Matrix Green
     },
     {
-        order: 4,
-        startLat: 19.0760,
-        startLng: 72.8777,
-        endLat: 55.7558,
-        endLng: 37.6173,
-        color: "#ffdd00", // Yellow
+      order: 4,
+      startLat: 19.0760,
+      startLng: 72.8777,
+      endLat: 55.7558,
+      endLng: 37.6173,
+      color: "#ffdd00", // Yellow
     },
     {
-        order: 5,
-        startLat: -22.9068,
-        startLng: -43.1729,
-        endLat: 48.8566,
-        endLng: 2.3522,
-        color: "#ff4d00", // Orange
+      order: 5,
+      startLat: -22.9068,
+      startLng: -43.1729,
+      endLat: 48.8566,
+      endLng: 2.3522,
+      color: "#ff4d00", // Orange
     },
     {
-        order: 6,
-        startLat: 1.3521,
-        startLng: 103.8198,
-        endLat: 34.0522,
-        endLng: -118.2437,
-        color: "#bf00ff", // Purple
+      order: 6,
+      startLat: 1.3521,
+      startLng: 103.8198,
+      endLat: 34.0522,
+      endLng: -118.2437,
+      color: "#bf00ff", // Purple
     },
     {
-        order: 7,
-        startLat: 52.5200,
-        startLng: 13.4050,
-        endLat: -26.2041,
-        endLng: 28.0473,
-        color: "#ffffff", // White
+      order: 7,
+      startLat: 52.5200,
+      startLng: 13.4050,
+      endLat: -26.2041,
+      endLng: 28.0473,
+      color: "#ffffff", // White
     }
   ];
 
@@ -161,15 +174,15 @@ export function World() {
       <RendererConfig />
 
       {/* LIGHTING */}
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[200, 200, 200]} intensity={1.1} />
-      <pointLight position={[-300, 100, 300]} intensity={1.2} color="#a855f7" />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[200, 200, 200]} intensity={1.5} />
+      <pointLight position={[-300, 100, 300]} intensity={1.5} color="#a855f7" />
 
       {/* GLOBE */}
       <Globe
         data={arcs}
         globeConfig={{
-          globeColor: "#000000",
+          globeColor: "#1d1d32",
           atmosphereColor: "#ffffff",
           showAtmosphere: true,
           atmosphereAltitude: 0.1,
@@ -181,8 +194,8 @@ export function World() {
         enableZoom={false}
         autoRotate
         autoRotateSpeed={1.0}
-        minDistance={CAMERA_Z}
-        maxDistance={CAMERA_Z}
+        minDistance={responsiveCameraZ}
+        maxDistance={responsiveCameraZ}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI - Math.PI / 3}
       />
